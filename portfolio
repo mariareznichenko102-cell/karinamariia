@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Social Media &amp; Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #17151a;
+    --bg-panel: #1e1c22;
+    --line: #34313a;
+    --ink: #f4f1ec;
+    --ink-dim: #a9a4b0;
+    --magenta: #ff3d81;
+    --gold: #f2c230;
+    --focus: #f4f1ec;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--magenta); color: #17151a; }
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--focus); outline-offset: 3px; }
+
+  .display{
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 0.92;
+  }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+  p{ margin: 0; }
+
+  /* ---------- HERO ---------- */
+
+  header.hero{ padding: 88px 0 0; border-bottom: 1px solid var(--line); }
+
+  .hero-kicker{
+    display:flex; align-items:center; gap:10px;
+    font-size: 13px; color: var(--ink-dim); margin-bottom: 28px;
+  }
+  .hero-kicker .dot{ width:7px; height:7px; border-radius:50%; background: var(--gold); flex: none; }
+
+  h1.hero-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 9.5vw, 116px);
+    margin: 0;
+  }
+  h1.hero-title span{
+    display:block; opacity:0; transform: translateY(14px);
+    animation: rise 0.7s cubic-bezier(.2,.7,.3,1) forwards;
+  }
+  h1.hero-title span:nth-child(2){ color: var(--magenta); }
+  h1.hero-title span:nth-child(1){ animation-delay: 0s; }
+  h1.hero-title span:nth-child(2){ animation-delay: .06s; }
+  h1.hero-title span:nth-child(3){ animation-delay: .12s; }
+
+  @keyframes rise{ to{ opacity:1; transform:none; } }
+
+  .hero-copy{
+    max-width: 580px; font-size: 18px; line-height: 1.55;
+    color: var(--ink-dim); margin: 26px 0 48px;
+  }
+  .hero-copy strong{ color: var(--ink); font-weight: 700; }
+
+  .marquee{ overflow: hidden; border-top: 1px solid var(--line); white-space: nowrap; position: relative; }
+  .marquee-track{ display:inline-block; padding: 16px 0; animation: scroll 28s linear infinite; }
+  .marquee span{
+    font-family:'Bebas Neue', sans-serif; font-size: 20px;
+    letter-spacing: 0.06em; color: var(--ink-dim); margin-right: 36px;
+  }
+  .marquee span.city{ color: var(--ink); }
+  @keyframes scroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{ animation: none; }
+    h1.hero-title span{ animation: none; opacity:1; transform:none; }
+  }
+
+  /* ---------- CHAPTERS (shared) ---------- */
+
+  main{ padding: 64px 0 40px; }
+  .chapter{ margin-bottom: 64px; }
+
+  .chapter-head{ display:flex; align-items: baseline; gap: 16px; margin-bottom: 6px; }
+  .chapter-num{ font-family:'Bebas Neue', sans-serif; font-size: 20px; color: var(--gold); }
+  .chapter-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4.5vw, 40px);
+    letter-spacing: 0.01em;
+  }
+  .chapter-sub{ color: var(--ink-dim); font-size: 14px; margin: 0 0 18px; padding-left: 46px; }
+
+  @media (max-width: 620px){
+    .chapter-sub{ padding-left: 0; }
+    .chapter-num{ display:none; }
+  }
+
+  /* ---------- PROJECT ROWS ---------- */
+
+  .project-row{
+    display:flex; align-items: center; justify-content: space-between; gap: 18px;
+    padding: 20px 0; padding-left: 46px;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+    transition: padding-left .25s ease, color .25s ease;
+  }
+  .chapter .project-row:last-of-type{ border-bottom: 1px solid var(--line); }
+  .project-row:hover, .project-row:focus-visible{ padding-left: 58px; color: var(--magenta); }
+
+  .project-main{ display:flex; align-items: baseline; gap: 16px; min-width: 0; }
+  .project-name{ font-family:'Bebas Neue', sans-serif; font-size: clamp(22px, 3.2vw, 30px); white-space: nowrap; }
+  .project-desc{ color: var(--ink-dim); font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .project-row:hover .project-desc, .project-row:focus-visible .project-desc{ color: inherit; }
+
+  .project-right{ display:flex; align-items:center; gap: 14px; flex: none; }
+  .project-city{
+    font-size: 12px; color: var(--ink-dim);
+    border: 1px solid var(--line); border-radius: 100px; padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .project-arrow{ font-size: 18px; transition: transform .25s ease; }
+  .project-row:hover .project-arrow, .project-row:focus-visible .project-arrow{ transform: translate(3px,-3px); }
+
+  @media (max-width: 620px){
+    .project-row{ flex-direction: column; align-items: flex-start; gap: 8px; padding-left: 0; }
+    .project-row:hover, .project-row:focus-visible{ padding-left: 0; }
+    .project-main{ flex-direction: column; gap: 4px; }
+    .project-desc{ white-space: normal; }
+  }
+
+  /* ---------- SERVICES ---------- */
+
+  .service-grid{
+    padding-left: 46px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .service-item{ background: var(--bg); padding: 22px; }
+  .service-item h3{
+    font-family:'Bebas Neue', sans-serif; font-size: 22px; font-weight:400;
+    margin: 0 0 8px;
+  }
+  .service-item p{ color: var(--ink-dim); font-size: 14px; line-height: 1.5; }
+
+  @media (max-width: 680px){
+    .service-grid{ grid-template-columns: 1fr; padding-left: 0; }
+  }
+
+  .reels-row{
+    padding-left: 46px; margin-top: 24px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .reels-card{ border: 1px solid var(--line); padding: 20px; }
+  .reels-card .reel-label{
+    font-family:'Bebas Neue', sans-serif; font-size: 22px; color: var(--gold);
+    margin-bottom: 8px; display:block;
+  }
+  .reels-card p{ color: var(--ink-dim); font-size: 13px; line-height: 1.5; }
+  @media (max-width: 680px){
+    .reels-row{ grid-template-columns: 1fr; padding-left: 0; }
+  }
+
+  /* ---------- PRICING ---------- */
+
+  .price-panel{
+    margin-left: 46px;
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    padding: 40px;
+  }
+  @media (max-width: 680px){ .price-panel{ margin-left:0; padding: 28px 20px; } }
+
+  .price-top{
+    display:flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px; margin-bottom: 28px;
+  }
+  .price-name{ font-family:'Bebas Neue', sans-serif; font-size: 28px; }
+  .price-value{ font-family:'Bebas Neue', sans-serif; font-size: 44px; color: var(--gold); }
+  .price-value small{ font-family:'Manrope',sans-serif; font-size: 14px; color: var(--ink-dim); font-weight:600; }
+
+  .price-cols{ display:grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+  @media (max-width: 680px){ .price-cols{ grid-template-columns: 1fr; } }
+
+  .price-cols h4{
+    font-family:'Bebas Neue', sans-serif; font-weight:400; font-size: 16px;
+    color: var(--ink-dim); margin: 0 0 12px;
+  }
+  .price-cols ul{ margin:0; padding:0; list-style:none; }
+  .price-cols li{
+    font-size: 14px; line-height: 1.5; padding: 8px 0;
+    border-top: 1px solid var(--line);
+  }
+  .price-cols li:first-child{ border-top:none; }
+
+  .price-note{
+    font-size: 13px; color: var(--ink-dim); line-height: 1.6;
+    border-top: 1px solid var(--line); padding-top: 20px;
+  }
+  .price-note strong{ color: var(--ink); }
+
+  .price-extra{ margin-top: 16px; }
+  .price-extra summary{ cursor:pointer; font-size: 13px; color: var(--ink); }
+  .price-extra ul{ margin: 10px 0 0; padding-left: 18px; color: var(--ink-dim); font-size: 13px; line-height: 1.7; }
+
+  /* ---------- TEAM ---------- */
+
+  .team-row{
+    padding-left: 46px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+  }
+  @media (max-width: 680px){ .team-row{ grid-template-columns: 1fr; padding-left:0; } }
+
+  .team-card{
+    background: var(--bg); padding: 28px;
+    display:flex; align-items:center; justify-content: space-between; gap: 12px;
+    text-decoration: none; transition: background .2s ease;
+  }
+  .team-card:hover, .team-card:focus-visible{ background: var(--bg-panel); color: var(--magenta); }
+  .team-name{ font-family:'Bebas Neue', sans-serif; font-size: 26px; display:block; }
+  .team-role{ color: var(--ink-dim); font-size: 13px; }
+  .team-arrow{ font-size: 18px; flex: none; }
+
+  /* ---------- FOOTER ---------- */
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 40px 0 64px;
+    display:flex; flex-wrap: wrap; gap: 24px;
+    justify-content: space-between; align-items: flex-end;
+  }
+  .footer-meta{ color: var(--ink-dim); font-size: 13px; line-height: 1.7; }
+  .footer-mark{ font-family:'Bebas Neue', sans-serif; font-size: 22px; color: var(--ink-dim); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-kicker"><span class="dot"></span>PORTFOLIO · 2026</div>
+    <h1 class="hero-title">
+      <span>SOCIAL MEDIA</span>
+      <span>AND CONTENT</span>
+      <span>FOR BRANDS</span>
+    </h1>
+    <p class="hero-copy">
+      We run social media and produce photo &amp; video content for restaurants, bars,
+      markets and events across <strong>Prague, Warsaw and Riga</strong> — from daily
+      stories to covering Riga Fashion Week.
+    </p>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="city">PRAGUE</span><span>·</span>
+      <span class="city">WARSAW</span><span>·</span>
+      <span class="city">RIGA</span><span>·</span>
+      <span class="city">PRAGUE</span><span>·</span>
+      <span class="city">WARSAW</span><span>·</span>
+      <span class="city">RIGA</span><span>·</span>
+      <span class="city">PRAGUE</span><span>·</span>
+      <span class="city">WARSAW</span><span>·</span>
+      <span class="city">RIGA</span><span>·</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 01 SERVICES -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">01</span>
+      <h2 class="chapter-title">What We Do</h2>
+    </div>
+    <p class="chapter-sub">Full social media management &amp; project management, start to finish</p>
+
+    <div class="service-grid">
+      <div class="service-item">
+        <h3>Strategy</h3>
+        <p>Marketing strategy development and ongoing refinement, brand positioning and packaging across social media.</p>
+      </div>
+      <div class="service-item">
+        <h3>Brand Book</h3>
+        <p>Visual style, colors, fonts and core communication principles, kept consistent across every post.</p>
+      </div>
+      <div class="service-item">
+        <h3>Content Planning</h3>
+        <p>Monthly content plan, content series, promotions and content mechanics planned ahead of time.</p>
+      </div>
+      <div class="service-item">
+        <h3>Production</h3>
+        <p>Filming and editing Reels, carousels and Stories — shoots scheduled and run around the content plan.</p>
+      </div>
+      <div class="service-item">
+        <h3>Publishing &amp; Community</h3>
+        <p>Day-to-day posting and account management, keeping the feed and inbox active and on-brand.</p>
+      </div>
+      <div class="service-item">
+        <h3>Project Management</h3>
+        <p>Deadlines, shoot logistics and coordination handled end-to-end, so the client only reviews and approves.</p>
+      </div>
+      <div class="service-item">
+        <h3>Reporting</h3>
+        <p>Monthly report with results and recommendations for the following month.</p>
+      </div>
+      <div class="service-item">
+        <h3>Tools</h3>
+        <p>CapCut, Canva, Figma and AI tools for editing, design, visual concepts and content production.</p>
+      </div>
+    </div>
+
+    <div class="reels-row">
+      <div class="reels-card">
+        <span class="reel-label">Falling In Love</span>
+        <p>Builds an emotional connection with the brand: aesthetics, atmosphere, story, values, team and lifestyle.</p>
+      </div>
+      <div class="reels-card">
+        <span class="reel-label">Pollination</span>
+        <p>Reaches and engages new audiences: trends, humor, interactives, useful and potentially viral formats.</p>
+      </div>
+      <div class="reels-card">
+        <span class="reel-label">Selling</span>
+        <p>Introduces the product and turns attention into purchase: reviews, benefits, offers, promotions and CTAs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">02</span>
+      <h2 class="chapter-title">Retail &amp; Markets</h2>
+    </div>
+    <p class="chapter-sub">Running the accounts for grocery chains</p>
+
+    <a class="project-row" href="https://www.instagram.com/bestmarket_cz?stkn=MTk3enQ4OHFtajY0MA==" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Best Market CZ</span>
+        <span class="project-desc">grocery store chain</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Czechia</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+
+    <a class="project-row" href="https://www.instagram.com/bestmarket_pl?stkn=NWkybzZrazEybWJm" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Best Market PL</span>
+        <span class="project-desc">grocery store chain</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Poland</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+  </section>
+
+  <!-- 03 -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">03</span>
+      <h2 class="chapter-title">Restaurants &amp; Bars</h2>
+    </div>
+    <p class="chapter-sub">Shooting menus, atmosphere and everyday content</p>
+
+    <a class="project-row" href="https://www.instagram.com/shoyu.riga?stkn=bDIwd3M1cXd2Ynk4" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Shoyu</span>
+        <span class="project-desc">restaurant</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Riga</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+
+    <a class="project-row" href="https://www.instagram.com/lamouka.cz?stkn=MWxsNG0yNWZobzFwOA==" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">La Mouka</span>
+        <span class="project-desc">Italian bistro &amp; coffee shop</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Prague</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+
+    <a class="project-row" href="https://www.instagram.com/yorirestaurant?stkn=MWZsdm9lYnB3bWhrbQ==" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Yori Restaurant</span>
+        <span class="project-desc">restaurant</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">—</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+
+    <a class="project-row" href="https://www.instagram.com/olive_branch_prague?stkn=MWRiNTRkNTd2aWY3" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Olive Branch</span>
+        <span class="project-desc">restaurant / bar</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Prague</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+  </section>
+
+  <!-- 04 -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">04</span>
+      <h2 class="chapter-title">Nightlife &amp; Entertainment</h2>
+    </div>
+    <p class="chapter-sub">Live event coverage and real-time stories</p>
+
+    <a class="project-row" href="https://www.instagram.com/cyberempirecz?stkn=a3JoeXhodDAwaDNn" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Cyber Empire</span>
+        <span class="project-desc">esports &amp; gaming club</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Prague</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+
+    <a class="project-row" href="https://www.instagram.com/pitstoplounge.cz?stkn=MWlhYzg3MDUzNW43" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Pit Stop Lounge</span>
+        <span class="project-desc">lounge bar</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Prague</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+  </section>
+
+  <!-- 05 -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">05</span>
+      <h2 class="chapter-title">Fashion &amp; Events</h2>
+    </div>
+    <p class="chapter-sub">Covering major events</p>
+
+    <a class="project-row" href="https://www.instagram.com/rigafashionweek?stkn=emdpMGtsd3BjZzVi" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Riga Fashion Week</span>
+        <span class="project-desc">Latvia's leading fashion week</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">Riga</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+  </section>
+
+  <!-- 06 -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">06</span>
+      <h2 class="chapter-title">Community</h2>
+    </div>
+    <p class="chapter-sub">Content for the community</p>
+
+    <a class="project-row" href="https://www.instagram.com/obiruch.community?stkn=MWcxOWlseWRza2RheA==" target="_blank" rel="noopener">
+      <span class="project-main">
+        <span class="project-name">Obiruch Community</span>
+        <span class="project-desc">community project</span>
+      </span>
+      <span class="project-right">
+        <span class="project-city">—</span>
+        <span class="project-arrow">↗</span>
+      </span>
+    </a>
+  </section>
+
+  <!-- 07 PRICING -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">07</span>
+      <h2 class="chapter-title">Pricing</h2>
+    </div>
+    <p class="chapter-sub">One package, built for steady monthly growth</p>
+
+    <div class="price-panel">
+      <div class="price-top">
+        <div class="price-name">Marketing Package</div>
+        <div class="price-value">30,000 Kč <small>/ month</small></div>
+      </div>
+
+      <p class="hero-copy" style="margin:0 0 28px; font-size:15px;">
+        Full social media management for your brand: from strategy and visual
+        identity to regular content, shoots and monthly analytics.
+      </p>
+
+      <div class="price-cols">
+        <div>
+          <h4>Strategy &amp; Management</h4>
+          <ul>
+            <li>Marketing strategy development &amp; refinement</li>
+            <li>Brand positioning across social media</li>
+            <li>Brand Book: style, colors, fonts, tone</li>
+            <li>Monthly content plan</li>
+            <li>Publishing &amp; account management</li>
+            <li>Content series, promos &amp; mechanics planning</li>
+            <li>Monthly report with recommendations</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Content</h4>
+          <ul>
+            <li>15 core posts / month — Reels + carousels</li>
+            <li>30 Stories / month</li>
+            <li>2–3 shoots / month, scheduled in advance</li>
+            <li>Product &amp; service reviews</li>
+            <li>Polls &amp; interactive content</li>
+            <li>Promotions &amp; special offers</li>
+            <li>Trending, brand, sales &amp; engagement formats</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="price-note">
+        <strong>Tools:</strong> CapCut, Canva, Figma and AI tools for editing, design,
+        visual concepts and content production.
+      </p>
+
+      <details class="price-extra">
+        <summary>Billed separately</summary>
+        <ul>
+          <li>Organizing collaborations</li>
+          <li>UGC content &amp; working with UGC creators</li>
+          <li>Working with bloggers &amp; influencers</li>
+          <li>Flyers, banners &amp; other print design</li>
+          <li>Individual promo &amp; special campaigns</li>
+          <li>Organizing &amp; promoting events</li>
+          <li>Professional photoshoots &amp; photographer services</li>
+          <li>Additional shoots &amp; content volume beyond the package</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- 08 TEAM -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="chapter-num">08</span>
+      <h2 class="chapter-title">Team</h2>
+    </div>
+    <p class="chapter-sub">Two of us, running every account</p>
+
+    <div class="team-row">
+      <a class="team-card" href="https://www.instagram.com/yushechkaaaa/" target="_blank" rel="noopener">
+        <span>
+          <span class="team-name">Mariia</span>
+          <span class="team-role">@yushechkaaaa</span>
+        </span>
+        <span class="team-arrow">↗</span>
+      </a>
+      <a class="team-card" href="https://www.instagram.com/karinanezka/" target="_blank" rel="noopener">
+        <span>
+          <span class="team-name">Karina</span>
+          <span class="team-role">@karinanezka</span>
+        </span>
+        <span class="team-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-mark">Prague · Warsaw · Riga</div>
+  <div class="footer-meta">
+    Social media &amp; content production<br>
+    2026
+  </div>
+</footer>
+
+</body>
+</html>
